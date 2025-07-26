@@ -27,7 +27,11 @@ document.addEventListener('DOMContentLoaded', function() {
           event.preventDefault();
           const target = document.querySelector(href);
           if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (window.innerWidth <= 768) {
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+              target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
             // Zamknij menu po kliknięciu linku (na mobile)
             if (window.innerWidth <= 768) {
               menu.classList.remove('open');
@@ -88,24 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
       hamburgerBtn.setAttribute('aria-expanded', isOpen);
     });
 
-    // Pokazuj/ukrywaj hamburgera przy scrollu (tylko na mobile)
-    function checkScreenSize() {
-      if (window.innerWidth <= 768) {
-        window.addEventListener('scroll', function() {
-          if (window.scrollY > 100) {
-            hamburgerBtn.style.display = 'flex';
-          } else {
-            hamburgerBtn.style.display = 'none';
-            menu.classList.remove('open');
-            hamburgerBtn.setAttribute('aria-expanded', 'false');
-          }
-        });
-      } else {
-        hamburgerBtn.style.display = 'none';
-        menu.classList.remove('open');
-      }
-    }
-
     // Inicjalizacja i nasłuchiwanie zmiany rozmiaru okna
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
@@ -152,8 +138,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const errorMessage = document.getElementById('errorMessage');
   const loginOverlay = document.getElementById('loginOverlay');
   const pageContent = document.getElementById('pageContent');
-  
-
   
   loginButton.addEventListener('click', function() {
     if (passwordInput.value === 'matma55') {
@@ -227,4 +211,34 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   }
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(event) {
+    const targetId = this.getAttribute('href');
+    if (targetId.length > 1) {  // link do sekcji na stronie
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        event.preventDefault();
+        if (window.innerWidth <= 768) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }
+  });
+});
+
+//submenu dla mobile
+document.addEventListener('DOMContentLoaded', function() {
+  const submenuParents = document.querySelectorAll('.has-submenu > a');
+
+  submenuParents.forEach(function(parentLink) {
+    parentLink.addEventListener('click', function(e) {
+      e.preventDefault(); // zapobiega przejściu do # lub innego linku
+      const parentLi = this.parentElement;
+      parentLi.classList.toggle('open'); // dodaje lub usuwa klasę open, co pokazuje submenu
+    });
+  });
 });

@@ -10,6 +10,40 @@
       box-sizing: border-box;
     }
 
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Sticky menu */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Nowy hamburger (3 linie) */
+#hamburgerBtn {
+  display: none;
+  background: none;
+  border: none;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 24px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.hamburger-line {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+}
+
     body {
       margin: 0;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -61,6 +95,7 @@
       align-items: center;
       flex-wrap: wrap;
     }
+    
 
     .logo {
       font-size: 24px;
@@ -738,45 +773,79 @@ h2 {
       margin-bottom: 0;
     }
 
+    .mobile-only {
+      display: none; /* domyślnie ukrywamy na desktopie */
+    }
+
 /* ==================== MEDIA QUERIES - MOBILE ==================== */
 @media (max-width: 992px) {
   /* Ogólne dostosowania */
   body {
     font-size: 16px;
+    padding-top: 100px; /* Dodaj padding aby content nie był zasłonięty przez sticky header */
+  }
+
+img[src*="images/wyniki.png"] {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   
   .container {
     padding: 0 15px;
   }
   
-  /* Top bar - mniejsze ikony i odstępy, ukrycie emaila */
-  .top-bar {
-    padding: 8px 15px;
-    font-size: 14px;
-    gap: 15px;
-    justify-content: center;
-  }
+  /* Top bar - sticky header */
+
   
   .top-bar .email-contact {
     display: none;
   }
 
-  /* Pozostawia resztę elementów bez zmian */
-  .top-bar .phone-contact,
-  .top-bar a {
+  /* Nawigacja - sticky pod top barem */
+ .top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 15px;
+    font-size: 14px;
+    gap: 15px;
+    justify-content: center;
+    z-index: 1000;
+    background: var(--top-bar-bg); /* Teraz będzie #333 */
     display: flex;
     align-items: center;
   }
   
-  /* Nawigacja - hamburger menu */
   .nav-bar {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    right: 0;
     padding: 10px 15px;
-    position: relative;
+    z-index: 999;
+    background: var(--nav-bar-bg); /* Teraz będzie #333 */
+    align-items: center;
   }
+
+  .top-bar {
+  background: #333 !important;
+}
+
+.nav-bar {
+  background: #444 !important;
+}
   
-  .nav-bar .container {
-    justify-content: center;
-  }
+.nav-bar .container {
+  position: relative;  /* by hamburgerBtn z pozycji absolute działał */
+  width: 100%;
+  max-width: 1200px;   /* jeśli masz limit szerokości */
+  margin: 0 auto;
+  display: flex;
+  justify-content: center; /* wyśrodkowanie logo + napisu */
+  align-items: center;
+}
   
   .logo {
     font-size: 20px;
@@ -786,18 +855,18 @@ h2 {
     height: 30px;
   }
   
-  /* Menu główne - ukryte domyślnie, pokazywane po kliknięciu hamburgera */
+  /* Menu główne */
   .menu {
     display: none;
     position: fixed;
-    top: 70px;
+    top: 100px; /* Top-bar + nav-bar height */
     left: 0;
     width: 100%;
     background: var(--gray-bg);
     flex-direction: column;
     gap: 0;
     padding: 15px 0;
-    z-index: 999;
+    z-index: 998;
   }
   
   .menu.open {
@@ -816,7 +885,7 @@ h2 {
     padding: 10px;
   }
   
-  /* Submenu - dostosowanie do mobile */
+  /* Submenu */
   .submenu {
     position: static !important;
     display: none !important;
@@ -834,23 +903,46 @@ h2 {
     padding: 8px 0 !important;
   }
   
+  
   /* Przycisk hamburgera */
-  #hamburgerBtn {
-    display: flex;
-    position: fixed;
-    left: 15px;
-    top: 15px;
+#hamburgerBtn {
+  position: absolute;
+  right: 15px;
+  
+  transform: translateY(-33%);
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px; /* dopasowanie do wysokości navbaru */
+  width: 50px; /* kwadrat */
+  cursor: pointer;
+  /* Dodaj tło takie samo jak navbar */
+  background-color: var(--nav-bar-bg); /* lub #444 jeśli nie masz zmiennej */
+  /* Opcjonalnie: kwadratowy cień */
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  border-radius: 0;
+  font-size: 24px; /* rozmiar ikonki */
+  color: white; /* lub dostosuj */
+}
+  .white-gap {
+    height: 30px; /* zmień na tyle, ile chcesz odstępu */
+    background: white;
   }
   
-  /* Hero section - układ pionowy */
+  
+  /* Hero section - dostosowany padding na górze */
   header.hero-wrapper {
-    padding: 60px 15px;
-    margin-top: 60px;
+    padding: 60px 15px 40px;
+    margin-top: 0;
   }
+
   
   .hero {
     flex-direction: column;
     gap: 30px;
+    
   }
   
   .hero-left h2 {
@@ -870,7 +962,7 @@ h2 {
     font-size: 22px;
   }
   
-  /* Sekcja z ikonami - nowy styl */
+  /* Sekcja z ikonami */
   .section-icons {
     padding: 40px 20px;
     background: white;
@@ -938,16 +1030,19 @@ h2 {
     padding: 40px 15px !important;
   }
   
-.about-section > div {
+  .about-section > div {
     flex-direction: column-reverse !important;
     align-items: center !important;
     text-align: center !important;
   }
 
-  .about-section img {
+.about-section img {
     max-width: 140px !important;
     height: auto;
     margin-top: 20px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block;
   }
   
   .about-section div[style*="font-size"] {
@@ -984,16 +1079,42 @@ h2 {
     font-size: 14px;
   }
   
-  /* Tooltipy - większe dla mobile */
+  /* Tooltipy */
   .tooltip .tooltip-text {
     font-size: 16px;
     white-space: normal;
     max-width: 200px;
   }
+
+  /* Klasy widoczności */
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: inline-block;
+  }
 }
 
 /* Mniejsze ekrany (np. smartfony w orientacji pionowej) */
 @media (max-width: 576px) {
+  body {
+    padding-top: 90px; /* Mniejszy padding dla mniejszych ekranów */
+  }
+
+  .top-bar {
+    padding: 6px 10px;
+  }
+
+  .nav-bar {
+    top: 36px; /* Mniejsza wysokość dla mniejszych ekranów */
+    padding: 8px 10px;
+  }
+
+  .menu {
+    top: 86px; /* Dostosowane do nowych wysokości */
+  }
+
   .hero-left h2 {
     font-size: 36px;
   }
@@ -1018,10 +1139,6 @@ h2 {
     font-size: 16px;
   }
   
-  .info-list li::before {
-    font-size: 22px;
-  }
-  
   /* Przyciski przewijania */
   #scrollTopBtn, #hamburgerBtn {
     width: 40px;
@@ -1031,32 +1148,7 @@ h2 {
   
   #hamburgerBtn {
     left: 10px;
-    top: 10px;
-  }
-  
-  /* Sekcja z ikonami - dostosowanie dla małych ekranów */
-  .section-icons .container {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .icon-box {
-    width: 100%;
-    max-width: 300px !important;
-  }
-
-  .desktop-only {
-  display: none;
-}
-
-}
-.mobile-only {
-  display: inline-block; /* lub block */
-}
-
-@media (min-width: 768px) {
-  .mobile-only {
-    display: none;
+    top: 8px;
   }
 }
 

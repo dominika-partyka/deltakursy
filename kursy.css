@@ -218,15 +218,99 @@ html {
 }
 
 @media (max-width: 768px) {
-  /* Ogólne dostosowania dla urządzeń mobilnych */
-  .top-bar {
-    padding: 8px 10px;
+
+  .top-bar .email-contact {
+    display: none;
+  }
+
+  /* Nawigacja - sticky pod top barem */
+ .top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 15px;
     font-size: 14px;
+    gap: 15px;
+    justify-content: center;
+    z-index: 1000;
+    background: var(--top-bar-bg); /* Teraz będzie #333 */
+    display: flex;
+    align-items: center;
   }
   
-  .nav-bar .container {
-    padding: 0 10px;
+  .nav-bar {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    right: 0;
+    padding: 10px 15px;
+    z-index: 999;
+    background: var(--nav-bar-bg); /* Teraz będzie #333 */
+    align-items: center;
   }
+
+  .top-bar {
+  background: #333 !important;
+}
+
+.nav-bar {
+  background: #444 !important;
+}
+  
+.nav-bar .container {
+  position: relative;  /* by hamburgerBtn z pozycji absolute działał */
+  width: 100%;
+  max-width: 1200px;   /* jeśli masz limit szerokości */
+  margin: 0 auto;
+  display: flex;
+  justify-content: center; /* wyśrodkowanie logo + napisu */
+  align-items: center;
+}
+  
+  .logo {
+    font-size: 20px;
+  }
+  
+  .logo img {
+    height: 30px;
+  }
+  #hamburgerBtn {
+  position: absolute;
+  right: 15px;
+  
+  transform: translateY(-33%);
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px; /* dopasowanie do wysokości navbaru */
+  width: 50px; /* kwadrat */
+  cursor: pointer;
+  /* Dodaj tło takie samo jak navbar */
+  background-color: var(--nav-bar-bg); /* lub #444 jeśli nie masz zmiennej */
+  /* Opcjonalnie: kwadratowy cień */
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  border-radius: 0;
+  font-size: 24px; /* rozmiar ikonki */
+  color: white; /* lub dostosuj */
+}
+  .white-gap {
+    height: 60px; /* zmień na tyle, ile chcesz odstępu */
+    background: white;
+  }
+.menu {
+  background-color: #444 !important;
+}
+
+.quick-links {
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* np. 15px odstępu między linkami */
+}
+  /* Ogólne dostosowania dla urządzeń mobilnych */
+
   
   /* Nawigacja mobilna */
   .menu {
@@ -277,7 +361,8 @@ html {
   
   .info-box ul li {
     font-size: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 17px;
+    text-align: left;
   }
   
   /* Tabela - przewijanie poziome */
@@ -298,10 +383,7 @@ html {
     gap: 20px;
   }
   
-  /* Ukrycie tekstu w logo na bardzo małych ekranach */
-  .logo span {
-    display: none;
-  }
+
   
   .section-title {
     font-size: 20px;
