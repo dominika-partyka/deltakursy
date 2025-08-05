@@ -236,6 +236,15 @@ html {
 
 @media (max-width: 768px) {
 
+  #film-section .youtube-box iframe {
+  width: 90%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9; /* zachowuje proporcje filmiku */
+  max-width: 100%; /* na wszelki wypadek */
+}
+
   .top-bar .email-contact {
     display: none;
   }
