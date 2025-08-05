@@ -236,6 +236,10 @@ html {
 
 @media (max-width: 768px) {
 
+  .youtube-box {
+    width: 95%;
+  }
+
   #film-section .youtube-box iframe {
   width: 90%;
   height: auto;
