@@ -217,6 +217,20 @@ html {
   scroll-behavior: smooth;
 }
 
+.youtube-box {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* dostosuj, jeśli chcesz inną maksymalną szerokość */
+  margin: 0 auto;
+  aspect-ratio: 16 / 9; /* prostokątne proporcje */
+}
+
+.youtube-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 @media (max-width: 768px) {
 
   .top-bar .email-contact {
