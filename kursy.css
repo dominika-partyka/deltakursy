@@ -1,3 +1,29 @@
+/* Biały box terminarza mniejszy i wycentrowany */
+.schedule-box {
+  width: 40%;          /* zmniejszamy szerokość do 80% */
+  margin: 0 auto;      /* centrowanie poziome */
+  background-color: #fff; /* jeśli chcesz biały kolor w tle */
+  padding: 20px;       /* opcjonalnie wewnętrzny odstęp */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* opcjonalny delikatny cień */
+  border-radius: 8px;  /* opcjonalne zaokrąglenie rogów */
+}
+
+/* Tabela w środku boxa, równe kolumny i wyśrodkowanie tekstu */
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* równe kolumny */
+}
+
+.schedule-table th,
+.schedule-table td {
+  text-align: center;  /* wyśrodkowanie tekstu w każdej kolumnie */
+  padding: 12px 10px;
+}
+
+.schedule-table th {
+  font-weight: 600;
+}
 /* Sekcja Najważniejsze informacje */
 .info-section {
   padding: 60px 20px;
