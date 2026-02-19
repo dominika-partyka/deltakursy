@@ -1,6 +1,6 @@
 /* Biały box terminarza - wersja responsywna */
 .schedule-box {
-  width: 80%;          /* standardowo 80% szerokości */
+  width: 60%;          /* standardowo 80% szerokości */
   margin: 0 auto;      /* centrowanie */
   background-color: #fff;
   padding: 20px;
