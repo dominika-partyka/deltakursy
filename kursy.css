@@ -1,4 +1,37 @@
+/* Biały box terminarza - wersja responsywna */
+.schedule-box {
+  width: 80%;          /* standardowo 80% szerokości */
+  margin: 0 auto;      /* centrowanie */
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
 
+/* Wyśrodkowanie tekstu w tabeli */
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.schedule-table th,
+.schedule-table td {
+  text-align: center;
+  padding: 12px 10px;
+}
+
+.schedule-table th {
+  font-weight: 600;
+}
+
+/* RESPONSYWNE: na ekranach mniejszych niż 768px */
+@media screen and (max-width: 768px) {
+  .schedule-box {
+    width: 100%;       /* zajmuje całą szerokość ekranu */
+    padding: 15px;     /* trochę mniejszy padding na telefonie */
+  }
+}
 /* Sekcja Najważniejsze informacje */
 .info-section {
   padding: 60px 20px;
